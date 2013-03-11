@@ -58,6 +58,8 @@ namespace ReprocessContentService
 
         private static string GetRelativeSourcePath(string path)
         {
+            if (path.Length <= Path.Combine(Environment.CurrentDirectory + "/", SOURCE_DIR).Length)
+                return "(root)";
             return path.Substring(Path.Combine(Environment.CurrentDirectory + "/", SOURCE_DIR).Length + 1);
         }
 
@@ -68,21 +70,21 @@ namespace ReprocessContentService
 
         private static void RecursivelyProcessDirectories(List<string> resultFiles, string inputDirectory, string outputDirectory)
         {
+            Console.WriteLine("Processing directory " + GetRelativeSourcePath(inputDirectory));
+
+            // Create output directory if it doesn't exist.
+            if (!Directory.Exists(outputDirectory))
+                Directory.CreateDirectory(outputDirectory);
+
+            // Process any files inside this directory.
+            resultFiles.AddRange(ProcessDirectory(inputDirectory, outputDirectory).Select(v => GetRelativeCompiledPath(Path.Combine(outputDirectory + "/", v))));
+
+            // Reprocess any directories inside this one.
             foreach (var directory in new DirectoryInfo(inputDirectory).GetDirectories())
             {
                 var fullOutputDirectory = Path.Combine(outputDirectory + "/", directory.Name);
 
-                Console.WriteLine("Processing directory " + GetRelativeSourcePath(directory.FullName));
-
-                // Create output directory if it doesn't exist.
-                if (!Directory.Exists(fullOutputDirectory))
-                    Directory.CreateDirectory(fullOutputDirectory);
-
-                // Reprocess any directories inside this one.
                 RecursivelyProcessDirectories(resultFiles, directory.FullName, fullOutputDirectory);
-
-                // Process any files inside these directories.
-                resultFiles.AddRange(ProcessDirectory(directory.FullName, fullOutputDirectory).Select(v => GetRelativeCompiledPath(Path.Combine(fullOutputDirectory + "/", v))));
             }
         }
 

@@ -58,7 +58,9 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ProjectGenerator.xslt" />
+    <EmbeddedResource Include="ProjectGenerator.xslt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestDocument.xml" />
