@@ -57,7 +57,7 @@ namespace XNAContentCompiler
         // Have we been disposed?
         bool isDisposed;
 
-        private ComboItemCollection Importers;
+        public ComboItemCollection Importers;
         #endregion
 
         #region Properties

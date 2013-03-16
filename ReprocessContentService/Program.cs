@@ -112,7 +112,8 @@ namespace ReprocessContentService
             {
                 foreach (var file in new DirectoryInfo(inputDirectory).GetFiles(extension))
                 {
-                    contentBuilder.Add(file.FullName, file.GetNameWithoutExtension());
+                    var importer = contentBuilder.Importers.FindByName(Path.GetExtension(file.FullName).ToLower());
+                    contentBuilder.Add(file.FullName, file.GetNameWithoutExtension(), importer.Value, importer.Other);
                 }
             }
 
