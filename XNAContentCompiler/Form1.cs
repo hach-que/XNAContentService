@@ -45,7 +45,7 @@ namespace XNAContentCompiler
         {
             LoadFileTypes();
             SelectedFiles = new ComboItemCollection();
-            this.contentBuilder = new ContentBuilder();
+            this.contentBuilder = new XnaContentBuilder();
             this.backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
         }
 

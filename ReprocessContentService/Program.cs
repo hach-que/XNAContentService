@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml;
+using XNAContentCompiler;
 
 namespace ReprocessContentService
 {
@@ -12,6 +13,8 @@ namespace ReprocessContentService
         private const string SOURCE_DIR = "source";
         private const string COMPILED_DIR = "compiled";
         private const string CONTENT_DIR = COMPILED_DIR + "/Content";
+
+        private static bool USE_MONO = true;
 
         public static void Main(string[] args)
         {
@@ -22,6 +25,8 @@ namespace ReprocessContentService
             }
 
             var name = args[0];
+            if (args.Length == 2 && args[1].ToLowerInvariant() == "false")
+                USE_MONO = false;
 
             if (!Directory.Exists(Path.Combine(Environment.CurrentDirectory + "/", SOURCE_DIR)))
             {
@@ -93,10 +98,10 @@ namespace ReprocessContentService
             var resultFiles = new List<string>();
 
             // We assume we're in the directory where all of the resources are.
-            var contentBuilder = new XNAContentCompiler.ContentBuilder();
+            var contentBuilder = USE_MONO ? (ContentBuilder)new MonoGameContentBuilder() : new XnaContentBuilder();
 
             // Add all files.
-            var extensions = new string[]
+            var extensions = new List<string>
             {
                 "*.bmp",
                 "*.jpg",
@@ -108,6 +113,8 @@ namespace ReprocessContentService
                 "*.wma",
                 "*.spritefont"
             };
+            if (USE_MONO)
+                extensions.Add("*.fx");
             foreach (var extension in extensions)
             {
                 foreach (var file in new DirectoryInfo(inputDirectory).GetFiles(extension))

@@ -11,32 +11,20 @@ using Microsoft.Build.Framework;
 
 namespace XNAContentCompiler
 {
-    public class ContentBuilder : IDisposable
+    public abstract class ContentBuilder : IDisposable
     {
+        protected abstract string[] PipelineAssemblies
+        {
+            get;
+        }
+
+        protected abstract string[,] FileImporterProcessorMappings
+        {
+            get;
+        }
+
         #region Fields
 
-
-        // What importers or processors should we load?
-        const string xnaVersion = ", Version=4.0.0.0, PublicKeyToken=842cf8be1de50553";
-
-        static string[] pipelineAssemblies =
-        {
-            "Microsoft.Xna.Framework.Content.Pipeline.FBXImporter" + xnaVersion,
-            "Microsoft.Xna.Framework.Content.Pipeline.XImporter" + xnaVersion,
-            "Microsoft.Xna.Framework.Content.Pipeline.TextureImporter" + xnaVersion,
-            "Microsoft.Xna.Framework.Content.Pipeline.EffectImporter" + xnaVersion,
-            "Microsoft.Xna.Framework.Content.Pipeline.AudioImporters" + xnaVersion,
-            "Microsoft.Xna.Framework.Content.Pipeline.VideoImporters" + xnaVersion,
-
-            // If you want to use custom importers or processors from
-            // a Content Pipeline Extension Library, add them here.
-            //
-            // If your extension DLL is installed in the GAC, you should refer to it by assembly
-            // name, eg. "MyPipelineExtension, Version=1.0.0.0, PublicKeyToken=1234567812345678".
-            //
-            // If the extension DLL is not in the GAC, you should refer to it by
-            // file path, eg. "c:/MyProject/bin/MyPipelineExtension.dll".
-        };
         // MSBuild objects used to dynamically build content.
         Project buildProject;
         ProjectRootElement projectRootElement;
@@ -83,18 +71,12 @@ namespace XNAContentCompiler
             CreateBuildProject();
             Importers = new ComboItemCollection();
             //Seguindo a Ordem: Extensão, Importer, Processor
-            
-            Importers.Add(new ComboItem(".mp3", "Mp3Importer", "SongProcessor"));
-            Importers.Add(new ComboItem(".wav", "WavImporter", "SoundEffectProcessor"));
-            Importers.Add(new ComboItem(".wma", "WmaImporter", "SongProcessor"));
 
-            Importers.Add(new ComboItem(".bmp", "TextureImporter", "TextureProcessor"));
-            Importers.Add(new ComboItem(".jpg", "TextureImporter", "TextureProcessor"));
-            Importers.Add(new ComboItem(".png", "TextureImporter", "TextureProcessor"));
-            Importers.Add(new ComboItem(".tga", "TextureImporter", "TextureProcessor"));
-            Importers.Add(new ComboItem(".dds", "TextureImporter", "TextureProcessor"));
-
-            Importers.Add(new ComboItem(".spritefont", "FontDescriptionImporter", "FontDescriptionProcessor"));
+            for (int i = 0; i < this.FileImporterProcessorMappings.GetLength(0); i++)
+                Importers.Add(new ComboItem(
+                    this.FileImporterProcessorMappings[i, 0],
+                    this.FileImporterProcessorMappings[i, 1],
+                    this.FileImporterProcessorMappings[i, 2]));
         }
 
 
@@ -153,13 +135,13 @@ namespace XNAContentCompiler
             buildProject = new Project(projectRootElement);
 
             buildProject.SetProperty("XnaPlatform", "Windows");
-            buildProject.SetProperty("XnaProfile", "Reach");
+            buildProject.SetProperty("XnaProfile", "HiDef");
             buildProject.SetProperty("XnaFrameworkVersion", "v4.0");
             buildProject.SetProperty("Configuration", "Release");
             buildProject.SetProperty("OutputPath", outputPath);
 
             // Register any custom importers or processors.
-            foreach (string pipelineAssembly in pipelineAssemblies)
+            foreach (string pipelineAssembly in this.PipelineAssemblies)
             {
                 buildProject.AddItem("Reference", pipelineAssembly);
             }
