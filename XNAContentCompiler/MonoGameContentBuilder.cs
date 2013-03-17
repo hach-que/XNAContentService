@@ -14,12 +14,12 @@ namespace XNAContentCompiler
         {
             get
             {
-                var path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "MonoGameContentProcessors.dll");
-                if (!File.Exists(path))
-                    throw new FileNotFoundException("Can't find the local MonoGameContentProcessors assembly.");
+                //var path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "MonoGameContentProcessors.dll");
+                //if (!File.Exists(path))
+                //    throw new FileNotFoundException("Can't find the local MonoGameContentProcessors assembly.");
                 return new string[]
                 {
-                    path,
+                    //path,
                     "Microsoft.Xna.Framework.Content.Pipeline.FBXImporter" + xnaVersion,
                     "Microsoft.Xna.Framework.Content.Pipeline.XImporter" + xnaVersion,
                     "Microsoft.Xna.Framework.Content.Pipeline.TextureImporter" + xnaVersion,
