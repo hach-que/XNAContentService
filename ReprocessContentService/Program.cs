@@ -129,6 +129,7 @@ namespace ReprocessContentService
             if (error != null)
             {
                 Console.Error.WriteLine(error);
+                Environment.Exit(1);
                 return resultFiles;
             }
 
