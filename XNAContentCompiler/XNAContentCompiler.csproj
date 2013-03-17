@@ -90,61 +90,61 @@
     <None Include="Resources\validation_anim.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MonoGame\lame_enc.dll">
+    <Content Include="lame_enc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\libmojoshader_32.dll">
+    <Content Include="libmojoshader_32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\ManagedPVRTC.dll">
+    <Content Include="ManagedPVRTC.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\MonoGameContentProcessors.dll">
+    <Content Include="MonoGameContentProcessors.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\MonoGameContentProcessors.pdb">
+    <Content Include="MonoGameContentProcessors.pdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\NAudio.dll">
+    <Content Include="NAudio.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\NAudio.WindowsMediaFormat.dll">
+    <Content Include="NAudio.WindowsMediaFormat.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\NAudio.xml">
+    <Content Include="NAudio.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\PVRTexLibWrapper.dll">
+    <Content Include="PVRTexLibWrapper.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\SharpDX.D3DCompiler.dll">
+    <Content Include="SharpDX.D3DCompiler.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\SharpDX.D3DCompiler.xml">
+    <Content Include="SharpDX.D3DCompiler.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\SharpDX.dll">
+    <Content Include="SharpDX.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\SharpDX.xml">
+    <Content Include="SharpDX.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\yeti.mmedia.dll">
+    <Content Include="yeti.mmedia.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\yeti.mmedia.pdb">
+    <Content Include="yeti.mmedia.pdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\yeti.mp3.dll">
+    <Content Include="yeti.mp3.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\yeti.mp3.pdb">
+    <Content Include="yeti.mp3.pdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\yeti.wmfsdk.dll">
+    <Content Include="yeti.wmfsdk.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MonoGame\yeti.wmfsdk.pdb">
+    <Content Include="yeti.wmfsdk.pdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

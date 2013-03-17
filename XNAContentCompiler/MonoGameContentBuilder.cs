@@ -14,9 +14,12 @@ namespace XNAContentCompiler
         {
             get
             {
+                var path = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "MonoGameContentProcessors.dll");
+                if (!File.Exists(path))
+                    throw new FileNotFoundException("Can't find the local MonoGameContentProcessors assembly.");
                 return new string[]
                 {
-                    Path.Combine(Environment.CurrentDirectory, "MonoGame\\MonoGameContentProcessors.dll"),
+                    path,
                     "Microsoft.Xna.Framework.Content.Pipeline.FBXImporter" + xnaVersion,
                     "Microsoft.Xna.Framework.Content.Pipeline.XImporter" + xnaVersion,
                     "Microsoft.Xna.Framework.Content.Pipeline.TextureImporter" + xnaVersion,
@@ -45,7 +48,7 @@ namespace XNAContentCompiler
 
                     {".spritefont", "FontDescriptionImporter", "FontDescriptionProcessor"},
 
-                    {".fx", "EffectImporter", "MGEffectProcessor"}
+                    {".fx", "EffectImporter", "EffectProcessor"}
                 };
             }
         }
